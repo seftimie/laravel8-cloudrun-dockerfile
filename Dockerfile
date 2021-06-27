@@ -1,5 +1,11 @@
+FROM composer:2.0 as build
+WORKDIR /app
+COPY . /app
+RUN composer global require hirak/prestissimo && \
+    composer install --no-scripts --no-autoloader && \
+    composer dump-autoload --optimize
+
 FROM php:7.3-apache-stretch
-COPY . /var/www/
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
@@ -8,6 +14,7 @@ RUN apt-get update -y && \
 RUN docker-php-ext-install pdo pdo_mysql mysqli
 
 EXPOSE 8080
+COPY --from=build /app /var/www/
 COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN chown -R www-data:www-data /var/www/;
