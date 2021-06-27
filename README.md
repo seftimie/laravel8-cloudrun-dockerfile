@@ -22,7 +22,7 @@ cd laravel8-cloudrun-dockerfile/
 
 ##### Build the image (back, on cloud shell)
 ```
-gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT/laravel ()
+gcloud builds submit --tag gcr.io/$GOOGLE_CLOUD_PROJECT/laravel
 ```
 
 ##### Deploy the app in cloud run
