@@ -17,17 +17,13 @@ EXPOSE 8080
 COPY --from=build /app /var/www/
 COPY docker/000-default.conf /etc/apache2/sites-available/000-default.conf
 
-ENV APP_NAME=Laravel
-ENV APP_ENV=production
-ENV APP_KEY=base64:QmHOdQbZJMyCpyKqTax7GGOqwPakUWuuIhv/TottAqA=
-ENV APP_DEBUG=false
-ENV LOG_CHANNEL=stderr
-
 RUN  chown -R www-data:www-data /var/www/;
 RUN  find /var/www/ -type f -exec chmod 644 {} \;
 RUN  find /var/www/ -type d -exec chmod 755 {} \;
 
 RUN cd /var/www/ && \
+    mv .env.example .env && \
+    export APP_KEY=$(`php artisan key:generate`) && \
     chgrp -R www-data storage bootstrap/cache && \
     chmod -R ug+rwx storage bootstrap/cache && \
     echo "Listen 8080" >> /etc/apache2/ports.conf && \
