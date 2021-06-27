@@ -6,8 +6,7 @@ In Google Cloud Platform, choose a project and then open **Cloud Shell** and run
 ##### Enable cloud run and cloud build apis		
 
 ```
-gcloud services enable run.googleapis.com
-gcloud service enable cloudbuild.googleapis.com
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com
 ```
 
 ##### Clone this repo (it contains a fresh new laravel8 app. I've only add a new route in web.php, the Dockerfile and the folder "Docker")
