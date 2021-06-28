@@ -1,8 +1,7 @@
-FROM composer:1.9.0 as build
+FROM composer:2.0 as build
 WORKDIR /app
 COPY . /app
-RUN composer global require hirak/prestissimo && \
-    composer install --no-scripts --no-autoloader && \
+RUN composer install --no-scripts --no-autoloader && \
     composer dump-autoload --optimize
 
 FROM php:7.3-apache-stretch
