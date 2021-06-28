@@ -23,7 +23,7 @@ RUN  find /var/www/ -type d -exec chmod 755 {} \;
 
 RUN cd /var/www/ && \
     mv .env.example .env && \
-    export APP_KEY=$(`php artisan key:generate`) && \
+    php artisan key:generate && \
     chgrp -R www-data storage bootstrap/cache && \
     chmod -R ug+rwx storage bootstrap/cache && \
     echo "Listen 8080" >> /etc/apache2/ports.conf && \
